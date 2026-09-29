@@ -26,6 +26,59 @@ footer{background:#f7f9fc;border-top:1px solid #e5e7eb;padding:28px 0;color:#475
 /* Consulta de registro */
 .registro-box{max-width:760px;margin:0 auto;border:1px solid #d7a52b;border-radius:14px;padding:28px;background:#fff;box-shadow:0 8px 22px #102a4314}.registro-form{display:grid;grid-template-columns:1fr auto;gap:10px}.registro-form input{font-weight:700;text-transform:uppercase}.registro-result{display:none;margin-top:18px;padding:18px;border-radius:10px;background:#f7f9fc;border-left:5px solid #d7a52b}.registro-result h3{margin:0 0 10px}.registro-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.estado{font-weight:900}.registro-help{text-align:center;color:#64748b;font-size:13px;margin-top:12px}
 @media(max-width:900px){nav{display:none}.hero-grid,.contact-grid{grid-template-columns:1fr}.hero-art{height:260px;order:-1}.hero-logo{width:125px;height:125px}.liberty{font-size:130px}.plane{font-size:50px}.flag{font-size:60px}.visas{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.step:not(:last-child):after{content:"↓";right:48%;top:auto;bottom:-25px}.feature-grid{grid-template-columns:repeat(2,1fr)}.footer{flex-direction:column;text-align:center}.registro-form,.registro-grid{grid-template-columns:1fr}}
+
+/* Rediseño claro: fondo blanco, estilo limpio y corporativo */
+:root{--navy:#12345a;--gold:#c99a22;--gold2:#b8860b;--ink:#172b42;--muted:#64748b}
+body{background:#fff;color:#172b42}
+header{background:rgba(255,255,255,.97);color:#12345a;border-bottom:1px solid #e7edf3;box-shadow:0 4px 18px rgba(16,42,67,.06)}
+.logo-text{color:#12345a;letter-spacing:.15px}.logo-text span{color:#b8860b}
+nav a{color:#24415f}nav a:hover{color:#a7790b}
+.btn,.access{background:linear-gradient(135deg,#f4d985,#d4a72c);color:#172b42;box-shadow:0 5px 14px rgba(181,135,24,.16);transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover,.access:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(181,135,24,.23)}
+.hero{color:#172b42;background:radial-gradient(circle at 78% 24%,#f4f7fa 0,#fff 42%,#fff 100%);border-bottom:1px solid #edf1f5}
+.hero h1{color:#12345a}.hero h1 span{color:#b8860b}.hero p{color:#536579}
+.hero-logo{box-shadow:0 8px 28px rgba(16,42,67,.12);border:1px solid #edf0f4}
+.liberty{color:#9aafc3;opacity:.55;filter:none}.city{background:linear-gradient(transparent,#e8eef4),repeating-linear-gradient(90deg,transparent 0 24px,#dbe5ee 24px 44px);opacity:.65}
+.hero-note{background:#fff;color:#12345a;border:1px solid #e4c66d;box-shadow:0 8px 24px rgba(16,42,67,.10)}
+.features{background:#f7f9fc;color:#12345a;border-top:1px solid #edf1f5;border-bottom:1px solid #edf1f5}.feature i{color:#b8860b}
+section{background:#fff}.process{background:#f8fafc}
+.visa{border-color:#e2e8f0;box-shadow:0 10px 28px rgba(16,42,67,.07)}
+.visa-title{background:#12345a}.visa-title.h2a{background:#315d42}.visa-title.h2b{background:#234f78}.visa-title.tn{background:#5a4c7b}
+.visa-symbol{background:linear-gradient(135deg,#f7f9fb,#edf2f6)}
+.box{border-color:#e1e7ee;box-shadow:0 8px 24px rgba(16,42,67,.04)}
+.box.dark{background:#fff;color:#172b42;border-color:#e1e7ee}
+.box.dark h3{color:#12345a}
+input,select,textarea{background:#fff;color:#172b42;border-color:#cbd5e1}input:focus,select:focus,textarea:focus{outline:2px solid #e7c45f;outline-offset:1px}
+.registro-box{border-color:#e4c66d;box-shadow:0 12px 30px rgba(16,42,67,.07)}
+.registro-result{background:#f8fafc}
+footer{background:#f8fafc;border-top:1px solid #e5eaf0}
+@media(max-width:900px){.hero{background:#fff}.hero-grid{padding-top:24px;padding-bottom:28px}.hero-art{background:linear-gradient(180deg,#fff,#f7f9fc);border-radius:18px}.hero-note{right:8px;bottom:8px}.features .feature-grid{gap:18px 10px}.nav{padding:10px 0}.access{padding:10px 12px;font-size:12px}}
+
+
+/* Renovación visual formal: fotografía, fondos claros y tarjetas consistentes */
+.hero-art{height:430px;position:relative;display:block;overflow:hidden;border-radius:22px;background:#f4f7fa;border:1px solid #e5eaf0;box-shadow:0 18px 45px rgba(16,42,67,.12)}
+.hero-photo{width:100%;height:100%;object-fit:cover;display:block}
+.hero-art:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(7,30,54,.72))}
+.hero-note{right:18px;bottom:18px;left:18px;z-index:2;max-width:440px}
+.visas{align-items:stretch}
+.visa{border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 10px 28px rgba(16,42,67,.08);transition:transform .2s ease,box-shadow .2s ease}
+.visa:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(16,42,67,.13)}
+.visa-title{letter-spacing:.3px;padding:18px 12px}
+.visa-symbol{height:210px;display:block;overflow:hidden;background:#f1f5f9;font-size:0}
+.visa-photo{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.visa:hover .visa-photo{transform:scale(1.035)}
+.visa-body{padding:22px}
+.visa-body li{font-size:14px;line-height:1.55;color:#405267}
+.visa .btn{margin-top:16px}
+section#visas{background:#fff}
+section#visas h2,section h2{color:#12345a;letter-spacing:-.5px}
+.sub{color:#65758a;line-height:1.6}
+@media(max-width:900px){
+ .hero-art{height:290px;order:-1;border-radius:16px}
+ .hero-note{left:10px;right:10px;bottom:10px;font-size:13px}
+ .visa-symbol{height:220px}
+}
+
 </style>
 </head>
 <body>
@@ -41,7 +94,10 @@ footer{background:#f7f9fc;border-top:1px solid #e5e7eb;padding:28px 0;color:#475
 <h1>TU FUTURO<br><span>SIN FRONTERAS</span></h1>
 <p>Asesoría, gestión de documentos, seguimiento y orientación para procesos H-2A, H-2B y TN.</p>
 <a class="btn" href="#contacto">INICIA TU PROCESO →</a>
-</div><div class="hero-art"><div class="liberty">🗽</div><div class="plane">✈️</div><div class="flag">🇺🇸</div><div class="city"></div><div class="hero-note">“Más que un trámite,<br>es el inicio de una nueva historia.”</div></div></div></section>
+</div><div class="hero-art">
+<img class="hero-photo" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85" alt="Equipo profesional colaborando en un entorno de trabajo">
+<div class="hero-note">Acompañamiento claro y profesional<br><span style="font-weight:500">Información y seguimiento para cada etapa.</span></div>
+</div></div></section>
 
 <div class="features"><div class="wrap feature-grid">
 <div class="feature"><i>♢</i><b>PROCESO SEGURO</b></div><div class="feature"><i>♧</i><b>ACOMPAÑAMIENTO REAL</b></div><div class="feature"><i>▤</i><b>ORIENTACIÓN PROFESIONAL</b></div><div class="feature"><i>✈</i><b>OPORTUNIDADES EN USA</b></div>
@@ -49,9 +105,9 @@ footer{background:#f7f9fc;border-top:1px solid #e5e7eb;padding:28px 0;color:#475
 
 <section id="visas"><div class="wrap"><h2>Clasificaciones de visa</h2><p class="sub">Conoce de manera sencilla el objetivo de cada clasificación. La elegibilidad depende de los requisitos oficiales vigentes.</p>
 <div class="visas">
-<article class="visa"><div class="visa-title h2a">VISA H-2A<small>TRABAJO AGRÍCOLA TEMPORAL</small></div><div class="visa-symbol">🌱</div><div class="visa-body"><ul><li>Trabajo agrícola temporal.</li><li>Actividades como siembra, cultivo y cosecha.</li><li>Requiere empleador y oferta laboral elegible.</li><li>Proceso sujeto a autorización y requisitos oficiales.</li></ul><a class="btn" href="#contacto">CONOCE MÁS →</a></div></article>
-<article class="visa"><div class="visa-title h2b">VISA H-2B<small>TRABAJO TEMPORAL NO AGRÍCOLA</small></div><div class="visa-symbol">👷</div><div class="visa-body"><ul><li>Trabajo temporal no agrícola.</li><li>Puede incluir hotelería, construcción, mantenimiento y otros sectores.</li><li>Requiere empleador y oferta laboral elegible.</li><li>Proceso sujeto a disponibilidad y requisitos oficiales.</li></ul><a class="btn" href="#contacto">CONOCE MÁS →</a></div></article>
-<article class="visa"><div class="visa-title tn">VISA TN<small>PROFESIONALES — MÉXICO Y CANADÁ</small></div><div class="visa-symbol">💼</div><div class="visa-body"><ul><li>Para profesionales de ocupaciones elegibles.</li><li>Disponible para ciudadanos mexicanos o canadienses que cumplan requisitos.</li><li>Requiere una oferta laboral correspondiente.</li><li>La elegibilidad depende de la categoría y documentación aplicable.</li></ul><a class="btn" href="#contacto">CONOCE MÁS →</a></div></article>
+<article class="visa"><div class="visa-title h2a">VISA H-2A<small>TRABAJO AGRÍCOLA TEMPORAL</small></div><div class="visa-symbol"><img class="visa-photo" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1000&q=85" alt="Persona trabajando en labores agrícolas"></div><div class="visa-body"><ul><li>Trabajo agrícola temporal.</li><li>Actividades como siembra, cultivo y cosecha.</li><li>Requiere empleador y oferta laboral elegible.</li><li>Proceso sujeto a autorización y requisitos oficiales.</li></ul><a class="btn" href="#contacto">CONOCE MÁS →</a></div></article>
+<article class="visa"><div class="visa-title h2b">VISA H-2B<small>TRABAJO TEMPORAL NO AGRÍCOLA</small></div><div class="visa-symbol"><img class="visa-photo" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=85" alt="Personal trabajando en un entorno de construcción"></div><div class="visa-body"><ul><li>Trabajo temporal no agrícola.</li><li>Puede incluir hotelería, construcción, mantenimiento y otros sectores.</li><li>Requiere empleador y oferta laboral elegible.</li><li>Proceso sujeto a disponibilidad y requisitos oficiales.</li></ul><a class="btn" href="#contacto">CONOCE MÁS →</a></div></article>
+<article class="visa"><div class="visa-title tn">VISA TN<small>PROFESIONALES — MÉXICO Y CANADÁ</small></div><div class="visa-symbol"><img class="visa-photo" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Profesionales colaborando en una oficina"></div><div class="visa-body"><ul><li>Para profesionales de ocupaciones elegibles.</li><li>Disponible para ciudadanos mexicanos o canadienses que cumplan requisitos.</li><li>Requiere una oferta laboral correspondiente.</li><li>La elegibilidad depende de la categoría y documentación aplicable.</li></ul><a class="btn" href="#contacto">CONOCE MÁS →</a></div></article>
 </div></div></section>
 
 <section class="process" id="proceso"><div class="wrap"><h2>¿Cómo funciona?</h2><p class="sub">Te acompañamos con información y seguimiento durante cada etapa.</p><div class="steps">
@@ -70,10 +126,14 @@ footer{background:#f7f9fc;border-top:1px solid #e5e7eb;padding:28px 0;color:#475
 <section class="contact" id="contacto"><div class="wrap"><h2>Solicita información</h2><p class="sub">Completa tus datos y podrás enviar la solicitud directamente por WhatsApp.</p><div class="contact-grid">
 <div class="box dark"><h3>INICIA TU PROCESO</h3><form id="form"><input id="name" required placeholder="Nombre completo"><input id="phone" required placeholder="WhatsApp / Teléfono"><input id="city" placeholder="Ciudad"><select id="visa" required><option value="">Tipo de visa</option><option>H-2A</option><option>H-2B</option><option>TN</option><option>No estoy seguro</option></select><textarea id="msg" placeholder="Mensaje (opcional)"></textarea><button class="btn" type="submit">ENVIAR SOLICITUD →</button></form></div>
 <div class="box" id="nosotros"><h3>GRUPO COMERCIAL TÉCNICO ADMINISTRATIVO</h3><p><b>DE TRÁMITES PARA USA</b></p><p>Tu proceso, nuestro compromiso.</p><p>Asesoría · Gestión de documentos · Seguimiento · Oportunidades en USA</p></div>
-<div class="box"><h3>📲 CONTACTO</h3><p><b>WhatsApp</b></p><div class="wa"><a href="https://wa.me/522224943574" target="_blank">222 494 3574</a></div><p><b>Ubicación:</b><br>Puebla, México</p></div>
+<div class="box"><h3>📲 CONTACTO</h3><p><b>WhatsApp</b></p><div class="wa">
+<a href="https://wa.me/522224943574" target="_blank" rel="noopener">222 494 3574</a>
+<br><span style="display:block;margin:8px 0;border-top:1px solid #cfe8d5"></span>
+<a href="https://wa.me/528116386606" target="_blank" rel="noopener">811 638 6606</a>
+</div><p><b>Ubicación:</b><br>Puebla · Monterrey · Ciudad de México, México</p></div>
 </div></div></section>
 
-<footer><div class="wrap footer"><div><b>GCTA · Grupo Comercial Técnico Administrativo</b><br>Trámites para USA</div><div>📞 222 494 3574</div><div>🇲🇽 Puebla, México</div></div><div class="wrap legal">AVISO IMPORTANTE: GCTA ofrece información, orientación y gestión administrativa. No garantiza la aprobación de visas, empleo, ingreso a Estados Unidos ni una autorización migratoria. Las decisiones corresponden a las autoridades competentes y deben cumplirse los requisitos oficiales vigentes.</div></footer>
+<footer><div class="wrap footer"><div><b>GCTA · Grupo Comercial Técnico Administrativo</b><br>Trámites para USA</div><div>📞 222 494 3574 · 811 638 6606</div><div>🇲🇽 Puebla, México</div></div><div class="wrap legal">AVISO IMPORTANTE: GCTA ofrece información, orientación y gestión administrativa. No garantiza la aprobación de visas, empleo, ingreso a Estados Unidos ni una autorización migratoria. Las decisiones corresponden a las autoridades competentes y deben cumplirse los requisitos oficiales vigentes.</div></footer>
 <script>
 // REGISTROS: edita esta lista para agregar o actualizar solicitantes.
 // El solicitante solo necesita conocer su número, por ejemplo YYY-001.
