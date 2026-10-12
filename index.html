@@ -952,6 +952,11 @@ a{accent-color:#527568}
 @media(max-width:520px){#gcta-videos-informativos .gcta-videos-grid{grid-template-columns:1fr;max-width:420px;margin-inline:auto}}
 </style>
 
+<style id="gcta-consulta-pin">
+.registro-form #registroPin{text-transform:none;max-width:200px}
+@media(max-width:900px){.registro-form #registroPin{max-width:none}}
+</style>
+
 <style id="gcta-fondo-blanco-sin-cambios">
 /* Único ajuste solicitado: sustituir fondos beige/crema por blanco; conservar los demás colores. */
 :root{--ivory:#ffffff;--cream:#ffffff;--paper:#ffffff}
@@ -1110,7 +1115,7 @@ footer{background:#ffffff!important}
 </div></div></section>
 
 
-<section id="registro"><div class="wrap"><h2>Consulta tu registro</h2><p class="sub">Introduce el folio que te proporcionó nuestro equipo para consultar la información de seguimiento disponible para tu registro.</p><div class="registro-box"><form class="registro-form" id="registroForm"><input id="registroInput" required placeholder="Ejemplo: YYY-001" autocomplete="off"><button class="btn" type="submit">CONSULTAR →</button></form><p class="registro-help">Si aún no cuentas con un folio, comunícate con nuestro equipo por los canales oficiales de contacto.</p><div class="registro-result" id="registroResult"></div></div></div>
+<section id="registro"><div class="wrap"><h2>Consulta tu registro</h2><p class="sub">Introduce el folio y el PIN que te proporcionó nuestro equipo para consultar la información de seguimiento disponible para tu registro.</p><div class="registro-box"><form class="registro-form" id="registroForm"><input id="registroInput" required maxlength="30" placeholder="Folio" aria-label="Folio" autocomplete="off"><input id="registroPin" required type="password" inputmode="numeric" maxlength="12" placeholder="PIN" aria-label="PIN de consulta" autocomplete="off"><button class="btn" type="submit">CONSULTAR →</button></form><p class="registro-help">Si aún no cuentas con un folio, comunícate con nuestro equipo por los canales oficiales de contacto.</p><div class="registro-result" id="registroResult"></div></div></div>
 <div class="gcta-privacy-note"><span aria-hidden="true">🔒</span><p><strong>Cuida tus datos personales.</strong> Comparte documentos únicamente mediante los canales y procedimientos que el equipo te indique. No publiques datos sensibles en mensajes abiertos.</p></div>
 </section>
 
@@ -1173,35 +1178,52 @@ footer{background:#ffffff!important}
 
 <footer><div class="wrap footer"><div><b>GCTA · Grupo Comercial Técnico Administrativo</b><br>Trámites para USA</div><div>📞 811 638 6606</div><div>🇲🇽 Monterrey, Nuevo León, México</div></div><div class="wrap legal">AVISO IMPORTANTE: GCTA ofrece información, orientación y gestión administrativa. No garantiza la aprobación de visas, empleo, ingreso a Estados Unidos ni una autorización migratoria. Las decisiones corresponden a las autoridades competentes y deben cumplirse los requisitos oficiales vigentes.</div></footer>
 <script>
-// REGISTROS: edita esta lista para agregar o actualizar solicitantes.
-// El solicitante solo necesita conocer su número, por ejemplo YYY-001.
-const REGISTROS = {
-  "YYY-001": {nombre:"Solicitante de ejemplo", visa:"H-2A", estatus:"EN PROCESO", etapa:"Evaluación", fecha:"07/09/2026", mensaje:"Tu registro se encuentra activo."},
-  "YYY-002": {nombre:"Solicitante de ejemplo 2", visa:"H-2B", estatus:"DOCUMENTACIÓN", etapa:"Preparación", fecha:"07/09/2026", mensaje:"Documentación en revisión."}
-};
+// Consulta de registro: el folio y el PIN se verifican en el servidor (/api/consulta).
+function textoRegistro(etiqueta,valor,clase){
+  const p=document.createElement("p");
+  const b=document.createElement("b");b.textContent=etiqueta;
+  const v=document.createElement("span");v.textContent=valor||"";if(clase)v.className=clase;
+  p.append(b,document.createElement("br"),v);
+  return p;
+}
 
-function consultarRegistro(codigo){
-  const key=(codigo||"").trim().toUpperCase();
-  const r=REGISTROS[key];
+async function consultarRegistro(folio,pin){
   const box=document.getElementById("registroResult");
   box.style.display="block";
-  if(!r){
-    box.innerHTML='<h3>Registro no encontrado</h3><p>Verifica tu número de registro o comunícate con GCTA.</p>';
+  box.replaceChildren(Object.assign(document.createElement("p"),{textContent:"Consultando…"}));
+  let datos={},ok=false;
+  try{
+    const res=await fetch("/api/consulta",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({folio:folio,pin:pin})});
+    ok=res.ok;
+    datos=await res.json().catch(function(){return {};});
+  }catch(e){datos={error:"No fue posible realizar la consulta. Inténtalo más tarde."};}
+  box.replaceChildren();
+  if(!ok||!datos.registro){
+    box.append(Object.assign(document.createElement("h3"),{textContent:"Registro no encontrado"}));
+    box.append(Object.assign(document.createElement("p"),{textContent:datos.error||"Verifica tu folio y PIN o comunícate con GCTA."}));
     return;
   }
-  box.innerHTML='<h3>Registro '+key+'</h3><div class="registro-grid"><p><b>Nombre:</b><br>'+r.nombre+'</p><p><b>Tipo de visa:</b><br>'+r.visa+'</p><p><b>Estatus:</b><br><span class="estado">'+r.estatus+'</span></p><p><b>Etapa:</b><br>'+r.etapa+'</p><p><b>Última actualización:</b><br>'+r.fecha+'</p></div><p><b>Información:</b><br>'+r.mensaje+'</p>';
+  const r=datos.registro;
+  const fecha=r.ultima_actualizacion?new Date(r.ultima_actualizacion).toLocaleDateString("es-MX",{day:"2-digit",month:"2-digit",year:"numeric",timeZone:"UTC"}):"";
+  box.append(Object.assign(document.createElement("h3"),{textContent:"Registro "+r.folio}));
+  const grid=document.createElement("div");grid.className="registro-grid";
+  grid.append(textoRegistro("Nombre:",r.nombre),textoRegistro("Tipo de visa:",r.proceso),textoRegistro("Estatus:",r.estado,"estado"),textoRegistro("Etapa:",r.etapa),textoRegistro("Última actualización:",fecha));
+  box.append(grid);
+  if(r.mensaje)box.append(textoRegistro("Información:",r.mensaje));
 }
 
 document.getElementById("registroForm").addEventListener("submit",function(e){
   e.preventDefault();
-  const codigo=document.getElementById("registroInput").value;
-  consultarRegistro(codigo);
-  history.replaceState(null,"",location.pathname+"?registro="+encodeURIComponent(codigo.trim().toUpperCase()));
+  const folio=document.getElementById("registroInput").value.trim().toUpperCase();
+  const pinInput=document.getElementById("registroPin");
+  const pin=pinInput.value.trim();
+  pinInput.value="";
+  consultarRegistro(folio,pin);
 });
 
-// Permite abrir directamente un registro con ?registro=YYY-001
+// Permite abrir la página con el folio ya escrito: ?registro=FOLIO (el PIN siempre se pide)
 const codigoURL=new URLSearchParams(location.search).get("registro");
-if(codigoURL){document.getElementById("registroInput").value=codigoURL;consultarRegistro(codigoURL);}
+if(codigoURL){document.getElementById("registroInput").value=codigoURL.slice(0,30);}
 
 document.getElementById("form").addEventListener("submit",function(e){
 e.preventDefault();

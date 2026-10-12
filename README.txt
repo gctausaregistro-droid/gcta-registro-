@@ -15,5 +15,6 @@ La migración crea la tabla `registros` con:
 IMPORTANTE:
 - No contiene datos reales de solicitantes.
 - No expone credenciales de la base de datos.
-- El portal público y el panel administrativo todavía NO están conectados a la base.
-- El PIN no debe exponerse directamente desde el navegador; en la siguiente fase se debe implementar una función server-side para validar el acceso.
+- La consulta pública (/api/consulta) y el panel privado (/admin) ya usan la base, siempre desde funciones del servidor.
+- El PIN se guarda cifrado (scrypt) y nunca se devuelve al navegador.
+- El panel requiere la variable de entorno privada ADMIN_PASSWORD (mínimo 12 caracteres) configurada en Netlify.

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Administración | GCTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<header class="barra">
+  <div class="wrap barra-in">
+    <a class="marca" href="/" aria-label="Ir al sitio de GCTA"><b>GCTA</b><span>Panel de administración</span></a>
+    <button id="btnSalir" class="btn-sec" type="button" hidden>Cerrar sesión</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Inicio de sesión -->
+  <section id="vistaLogin" class="tarjeta login" hidden>
+    <p class="ceja">ACCESO PRIVADO</p>
+    <h1>Iniciar sesión</h1>
+    <p class="sub">Área exclusiva para el equipo de GCTA.</p>
+    <form id="formLogin" autocomplete="off">
+      <label for="contrasena">Contraseña de administrador</label>
+      <input id="contrasena" name="contrasena" type="password" required maxlength="256" autocomplete="current-password">
+      <button class="btn" type="submit">Entrar →</button>
+      <p id="msgLogin" class="aviso" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <!-- Panel -->
+  <section id="vistaPanel" hidden>
+    <div class="encabezado">
+      <div>
+        <p class="ceja">SOLICITANTES</p>
+        <h1>Registros</h1>
+      </div>
+      <button id="btnNuevo" class="btn" type="button">+ Nuevo solicitante</button>
+    </div>
+
+    <form id="formBuscar" class="buscar" role="search">
+      <input id="q" type="search" placeholder="Buscar por folio o nombre" maxlength="100" autocomplete="off">
+      <button class="btn-sec" type="submit">Buscar</button>
+    </form>
+
+    <p id="msgLista" class="aviso" role="status" hidden></p>
+    <div id="lista" class="lista" aria-live="polite"></div>
+    <div class="paginacion">
+      <button id="btnAnterior" class="btn-sec" type="button" hidden>← Anterior</button>
+      <span id="paginaActual"></span>
+      <button id="btnSiguiente" class="btn-sec" type="button" hidden>Siguiente →</button>
+    </div>
+  </section>
+</main>
+
+<!-- Formulario de alta / edición -->
+<dialog id="dlgRegistro" class="dialogo" aria-labelledby="tituloDialogo">
+  <form id="formRegistro" method="dialog" novalidate>
+    <div class="dlg-cab">
+      <h2 id="tituloDialogo">Nuevo solicitante</h2>
+      <button type="button" class="cerrar" id="btnCerrarDlg" aria-label="Cerrar">×</button>
+    </div>
+    <div class="campos">
+      <label>Folio único
+        <input name="folio" required maxlength="30" placeholder="Ej. GCTA-0001" autocomplete="off" class="mayus">
+      </label>
+      <label>Nombre completo
+        <input name="nombre" required maxlength="150" autocomplete="off">
+      </label>
+      <label>Proceso
+        <select name="proceso" required>
+          <option value="H-2A">H-2A</option><option value="H-2B">H-2B</option><option value="TN">TN</option>
+        </select>
+      </label>
+      <label>Etapa
+        <select name="etapa" required>
+          <option>Registro</option><option>Evaluación</option><option>Preparación</option><option>Trámite</option><option>Traslado</option>
+        </select>
+      </label>
+      <label>Estado
+        <select name="estado" required>
+          <option>En proceso</option><option>Documentación</option><option>Completado</option><option>Pendiente</option>
+        </select>
+      </label>
+      <label>Última actualización
+        <input name="ultima_actualizacion" type="date">
+        <small>Si se deja vacío se usa la fecha de hoy.</small>
+      </label>
+      <label class="ancho">PIN de consulta
+        <input name="pin" inputmode="numeric" pattern="\d{4,12}" maxlength="12" autocomplete="new-password">
+        <small id="ayudaPin">De 4 a 12 dígitos. Compártelo solo con el solicitante.</small>
+      </label>
+      <label class="ancho">Mensaje para el solicitante
+        <textarea name="mensaje" rows="4" maxlength="2000"></textarea>
+      </label>
+    </div>
+    <p id="msgRegistro" class="aviso" role="alert" hidden></p>
+    <div class="dlg-pie">
+      <button type="button" class="btn-sec" id="btnCancelar">Cancelar</button>
+      <button type="submit" class="btn" id="btnGuardar">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/admin/admin.js" defer></script>
+</body>
+</html>
